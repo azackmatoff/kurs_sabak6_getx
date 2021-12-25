@@ -8,10 +8,9 @@ import 'package:kurs_sabak6_getx/widgets/circular_button.dart';
 import 'package:kurs_sabak6_getx/widgets/reusable_widget.dart';
 
 class ResultScreen extends StatefulWidget {
-  const ResultScreen({Key key, this.height, this.weight}) : super(key: key);
-
-  final double height;
-  final double weight;
+  const ResultScreen({
+    Key key,
+  }) : super(key: key);
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
