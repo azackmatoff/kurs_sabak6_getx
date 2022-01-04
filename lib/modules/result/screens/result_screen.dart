@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kurs_sabak6_getx/app_constants/app_colors.dart';
 import 'package:kurs_sabak6_getx/app_constants/app_text_styles.dart';
+
 import 'package:kurs_sabak6_getx/modules/home/screens/home_screen.dart';
-import 'package:kurs_sabak6_getx/repositories/calculation_repo.dart';
+import 'package:kurs_sabak6_getx/modules/result/controllers/result_controller.dart';
+
 import 'package:kurs_sabak6_getx/widgets/circular_button.dart';
 
 import 'package:kurs_sabak6_getx/widgets/reusable_widget.dart';
 
-class ResultScreen extends StatefulWidget {
-  const ResultScreen({
+class ResultScreen extends StatelessWidget {
+  ResultScreen({
     Key key,
   }) : super(key: key);
 
-  @override
-  _ResultScreenState createState() => _ResultScreenState();
-}
-
-class _ResultScreenState extends State<ResultScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    calculationRepo.calculateBMI(widget.height, widget.weight);
-  }
+  final ResultController _resultController =
+      Get.put<ResultController>(ResultController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,18 +52,18 @@ class _ResultScreenState extends State<ResultScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              calculationRepo.getResult(),
+                              _resultController.getResult(),
                               style: AppTextStyles.resultSubTitle,
                             ),
                             Text(
-                              calculationRepo.getResultNumber(),
+                              _resultController.getResultNumber(),
                               style: AppTextStyles.resultNumber,
                             ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Text(
-                                calculationRepo.getInterpretation(),
+                                _resultController.getInterpretation(),
                                 style: AppTextStyles.titleTextStyle,
                                 textAlign: TextAlign.center,
                               ),

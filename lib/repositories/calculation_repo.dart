@@ -1,4 +1,6 @@
-import 'dart:math' as math;
+import 'dart:developer';
+
+import 'package:kurs_sabak6_getx/services/fake_services/fake_firestore.dart';
 
 class CalculationRepo {
   CalculationRepo({this.height, this.weight});
@@ -9,7 +11,9 @@ class CalculationRepo {
   double _bmi;
 
   void calculateBMI(double h, double w) {
-    _bmi = w / math.pow(h / 100, 2);
+    _bmi = fakeFirestore.calculateBMI(h, w);
+
+    log('CalculationRepo.calculateBMI _bmi ===>>> $_bmi');
   }
 
   String getResultNumber() {
@@ -17,23 +21,11 @@ class CalculationRepo {
   }
 
   String getResult() {
-    if (_bmi >= 25) {
-      return 'Overweight';
-    } else if (_bmi > 18.5) {
-      return 'Normal';
-    } else {
-      return 'Underweight';
-    }
+    return fakeFirestore.getResult(_bmi);
   }
 
   String getInterpretation() {
-    if (_bmi >= 25) {
-      return 'You have a higher than normal body weight. Try to exercise more.';
-    } else if (_bmi >= 18.5) {
-      return 'You have a normal body weight. Good job!';
-    } else {
-      return 'You have a lower than normal body weight. You can eat a bit more.';
-    }
+    return fakeFirestore.getInterpretation(_bmi);
   }
 }
 

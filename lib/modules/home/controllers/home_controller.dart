@@ -2,8 +2,11 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:kurs_sabak6_getx/app_enums/enums.dart';
+import 'package:kurs_sabak6_getx/repositories/calculation_repo.dart';
 
 class HomeController extends GetxController {
+  static final HomeController findHomeCont = Get.find<HomeController>();
+
   Rx<Gender> gender = Gender.UNKNOWN.obs;
   Rx<WeightOrAge> weightOrAge = WeightOrAge.UNKNOWN.obs;
 
@@ -58,8 +61,12 @@ class HomeController extends GetxController {
     height.value = val;
   }
 
-  chooseGender(Gender val) {
+  void chooseGender(Gender val) {
     log('chooseGender');
     gender.value = val;
+  }
+
+  void calculateBmi(double height, double width) {
+    calculationRepo.calculateBMI(height, width);
   }
 }

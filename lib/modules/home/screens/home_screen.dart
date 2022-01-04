@@ -173,10 +173,11 @@ class HomeScreen extends StatelessWidget {
                   style: AppTextStyles.buttonTextStyle,
                 ),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ResultScreen()));
+                  controller.calculateBmi(controller.height.value,
+                      controller.weigth.value.toDouble());
+
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ResultScreen()));
                 },
                 buttonColor: AppColors.buttonColor,
                 constraints: BoxConstraints(
